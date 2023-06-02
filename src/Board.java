@@ -1,20 +1,19 @@
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Board {
-    private HashSet<Point> liveCells;
-    private HashSet<Point> cellsToKill;
-    private HashSet<Point> cellsToCreate;
-    private HashSet<Point> cellsAlreadyChecked;
+    private Set<Point> liveCells;
+    private final Set<Point> cellsToKill = new HashSet<>();
+    private final Set<Point> cellsToCreate = new HashSet<>();
+    private final Set<Point> cellsAlreadyChecked = new HashSet<>();
 
-    public Board(HashSet<Point> initialLiveCells) {
+    public Board(Set<Point> initialLiveCells) {
         liveCells = initialLiveCells;
-        cellsToKill = new HashSet<>();
-        cellsToCreate = new HashSet<>();
-        cellsAlreadyChecked = new HashSet<>();
     }
 
-    public HashSet<Point> getLiveCells() {
-        return this.liveCells;
+    public Set<Point> getLiveCells() {
+         return Collections.unmodifiableSet(liveCells);
     }
 
     public void performGameStep() {
@@ -24,7 +23,7 @@ public class Board {
 
     private void prepareCellChanges() {
         for(Point liveCell : liveCells) {
-            this.processLiveCell(liveCell);
+            processLiveCell(liveCell);
             
             Point[] neighbourCells = liveCell.getNeighbours();
             for(Point neighbourCell : neighbourCells) {
@@ -41,7 +40,7 @@ public class Board {
     }
 
     private void processLiveCell(Point cell) {
-        int liveNeighboursCount = this.countLiveNeighbours(cell);
+        int liveNeighboursCount = countLiveNeighbours(cell);
         
         if(liveNeighboursCount < 2) { // underpopulation
             cellsToKill.add(cell);
@@ -53,7 +52,7 @@ public class Board {
     }
 
     private void processDeadCell(Point cell) {
-        int liveNeighboursCount = this.countLiveNeighbours(cell);
+        int liveNeighboursCount = countLiveNeighbours(cell);
         if(liveNeighboursCount == 3) {
             cellsToCreate.add(cell);
         }
@@ -66,7 +65,7 @@ public class Board {
         Point[] neighbours = position.getNeighbours();
 
         for(Point neighbour : neighbours) {
-            if(this.liveCells.contains(neighbour)) {
+            if(liveCells.contains(neighbour)) {
                 liveNeighboursCount++;
             }
         }

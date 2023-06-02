@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Set;
 
 public class Game {
     public static void main(String[] args) {
@@ -17,11 +18,11 @@ public class Game {
         }
     }
 
-    private static HashSet<Point> initialBoardState() {
+    private static Set<Point> initialBoardState() {
         return rPentomino();
     }
 
-    private static HashSet<Point> blinker() {
+    private static Set<Point> blinker() {
         HashSet<Point> cells = new HashSet<>();
 
         cells.add(new Point(0, 0));
@@ -31,8 +32,8 @@ public class Game {
         return cells;
     }
 
-    private static HashSet<Point> diehard() {
-        HashSet<Point> cells = new HashSet<>();
+    private static Set<Point> diehard() {
+        Set<Point> cells = new HashSet<>();
 
         cells.add(new Point(1, 0));
         cells.add(new Point(5, 0));
@@ -47,8 +48,8 @@ public class Game {
         return cells;
     }
 
-    private static HashSet<Point> rPentomino() {
-        HashSet<Point> cells = new HashSet<>();
+    private static Set<Point> rPentomino() {
+        Set<Point> cells = new HashSet<>();
 
         cells.add(new Point(1, 0));
 

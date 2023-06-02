@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Set;
 
 public class BoardRenderer {
     private Board board;
@@ -16,7 +16,7 @@ public class BoardRenderer {
     }
 
     public void render() {
-        HashSet<Point> liveCells = board.getLiveCells();
+        Set<Point> liveCells = board.getLiveCells();
 
         // Get the size of the game board
         for(Point cell : liveCells) {
